@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="css/style.css" />
+
+    <script src="js/counter.js" defer></script>
+    <script src="js/tooltip.js" defer></script>
+    <script src="js/runtime.js" defer></script>
+    <script src="js/gallery.js" defer></script>
+</head>
+<body class="p-8 flex flex-col space-y-8 justify-between font-mono">
+    <section class="card">
+        <div class="card-content flex flex-col justify-between w-full">
+            <p>
+                How to create a runtime for dynamic components
+            </p>
+
+            <div class="flex justify-end space-x-8 items-end" x-cloak defer-x-data="Counter">
+                <div class="counter">
+                    <p class="w-full pb-3">1st counter</p>
+                    <div class="flex space-x-4">
+                        <button class="counter-button btn" @click.prevent="increment()">
+                            <span x-text="count"></span>
+                        </button>
+                        <button class="counter-button btn-danger"  @click.prevent="reset()">
+                            Reset
+                        </button>
+                    </div>
+                </div>
+
+                <div x-ignore class="counter">
+                    <p class="w-full pb-3">2nd counter</p>
+
+                    <div class="flex space-x-4" x-cloak defer-x-data="Counter">
+                        <button class="counter-button btn" @click.prevent="increment()">
+                            <span x-text="count"></span>
+                        </button>
+                        <button class="counter-button btn-danger"  @click.prevent="reset()">
+                            Reset
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="card">
+        <div class="card-content flex flex-col justify-between w-full">
+            <p>
+                Lazy loading libraries
+            </p>
+
+            <div class="flex space-x-4 justify-end">
+                <button class="tooltip-button btn" 
+                    defer-x-data="Tooltip" x-init="init()" 
+                    data-tooltip="Ehi ciao"
+                    data-placement="left">
+                        Demo Tooltip
+                </button>
+
+                <button class="tooltip-button btn" 
+                    defer-x-data="Tooltip" x-init="init()" 
+                    data-tooltip="Another type of tooltip with different options">
+                        Demo Tooltip 2
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="card">
+        <div class="card-content flex flex-col justify-between w-full">
+            <p>
+                Lazy loading libraries part 2
+            </p>
+
+            <div class="flex space-x-4 justify-end">
+                <p class="flex justify-end" defer-x-data="Gallery">
+                    <script x-ref="json" type="application/json">
+                        [
+                            "https://picsum.photos/500",
+                            "https://picsum.photos/500",
+                            "https://picsum.photos/500",
+                            "https://picsum.photos/500"
+                        ]
+                    </script>
+            
+                    <button class="btn-alt" @click.prevent="open()">
+                        Demo Gallery
+                    </button>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="card" x-data="{ open: false }">
+        <div class="card-conten flex flex-col w-full">
+            <div  @click="open = ! open" class="p-4 bg-slate-800 w-full rounded flex justify-between items-center cursor-pointer">
+                <div class="flex items-center gap-2">
+                    <h4 class="font-medium text-white">Do we miss something?</h4>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 fill-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+            </div>
+            <div x-cloak x-show="open" @click.outside="open = false"  x-transition:enter="transition ease-out duration-300"
+                    x-transition:enter-start="opacity-0 translate-y-0"
+                    x-transition:enter-end="opacity-100 translate-y-0"
+                    x-transition:leave="transition ease-in duration-300"
+                    x-transition:leave-start="opacity-100 translate-y-10"
+                    x-transition:leave-end="opacity-0 translate-y-0" class="w-full bg-slate-100 p-4">
+                <h4 class="text-slate-800">
+                    Starting Alpine in the standard way prevent the possibility to manually add or load deferred components,
+                    What we have to do, is to manually load all the x-data Alpine components
+                </h4>
+                <button class="btn mt-4">Unfortunately</button>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

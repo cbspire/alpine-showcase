@@ -1,0 +1,9 @@
+{
+    "extends": ["eslint:recommended", "standard"],
+    "globals": {
+        "Alpine": true
+    },
+    "rules": {
+        "indent": ["error", 4]
+    }
+}
