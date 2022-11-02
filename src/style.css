@@ -18,15 +18,15 @@
 }
 
 .btn {
-    @apply bg-slate-800 py-2 px-6 text-white font-bold rounded flex items-center justify-center;
+    @apply bg-slate-800 py-2 px-6 text-white font-bold rounded flex items-center justify-center min-w-16;
 }
 
 .btn-danger {
-    @apply bg-red-800 py-2 px-6 text-white font-bold rounded flex items-center justify-center;
+    @apply bg-red-800;
 }
 
 .btn-alt {
-    @apply bg-green-700 py-2 px-6 text-white font-bold rounded flex items-center justify-center;
+    @apply bg-green-700;
 }
 
 @tailwind utilities;

@@ -1,6 +1,30 @@
 import Alpine from 'alpinejs'
 import Log from './utils/logger'
 
+/**
+ * Modules initialization
+ */
+ const initModules = () => {
+    window.components = window.components || []
+    window.components.push = function (obj) {
+        window.components[window.components.length] = obj
+        loadModule(obj)
+    }
+    
+    Log.runtime('Runtime: Loading Modules already registered')
+    
+    window.components.forEach(obj => loadModule(obj))
+    
+    Log.runtime('Runtime: Loaded')
+}
+
+
+/**
+ * This function load a Single Alpine Deferred Module
+ * 
+ * @param {{components: object, init: function}} data 
+ * @returns void
+ */
 const loadModule = async (data) => {
     if (typeof data !== 'object') {
         return
@@ -31,41 +55,25 @@ const loadModule = async (data) => {
          */
         components.forEach(element => {
             element.setAttribute('x-data', `${componentName}`)
+            element.setAttribute('x-init', element.getAttribute('defer-x-init'))
             element.removeAttribute('defer-x-data')
+            element.removeAttribute('defer-x-init')
 
             Alpine.initTree(element)
         })
     }
 }
 
-window.Alpine = Alpine
-
 /**
- * This is the trick
- * Starting Alpine prevent the possibility to manually add or load deferred components
- *
- * What we can do, is to manually load all the x-data Alpine components
+ * Lifecycle events
+ * 
+ * https://github.com/alpinejs/alpine/blob/76f0b736ee4e00902cb1b18fb7675c34e8f3c2da/packages/alpinejs/src/lifecycle.js#L30
  */
-// Alpine.start()
-
-document.querySelectorAll('[x-data]').forEach(element => {
-    Alpine.initTree(element)
+document.addEventListener('alpine:initialized', () => {
+    Log.runtime('Runtime: Huston, we\'re ready')
+    initModules()
 })
 
+Alpine.start()
+
 Log.runtime('Runtime: Alpine started')
-
-/**
- * Now we use the loader
- */
-
-window.components = window.components || []
-window.components.push = function (obj) {
-    window.components[window.components.length] = obj
-    loadModule(obj)
-}
-
-Log.runtime('Runtime: Loading Modules already registered')
-
-window.components.forEach(obj => loadModule(obj))
-
-Log.runtime('Runtime: Loaded')

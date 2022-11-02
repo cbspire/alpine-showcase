@@ -15,14 +15,14 @@
                 How to create a runtime for dynamic components
             </p>
 
-            <div class="flex justify-end space-x-8 items-end" x-cloak defer-x-data="Counter">
+            <div class="flex justify-end space-x-8 items-end" defer-x-data="Counter">
                 <div class="counter">
                     <p class="w-full pb-3">1st counter</p>
                     <div class="flex space-x-4">
                         <button class="counter-button btn" @click.prevent="increment()">
                             <span x-text="count"></span>
                         </button>
-                        <button class="counter-button btn-danger"  @click.prevent="reset()">
+                        <button class="counter-button btn btn-danger"  @click.prevent="reset()">
                             Reset
                         </button>
                     </div>
@@ -31,11 +31,11 @@
                 <div x-ignore class="counter">
                     <p class="w-full pb-3">2nd counter</p>
 
-                    <div class="flex space-x-4" x-cloak defer-x-data="Counter">
+                    <div class="flex space-x-4" defer-x-data="Counter">
                         <button class="counter-button btn" @click.prevent="increment()">
                             <span x-text="count"></span>
                         </button>
-                        <button class="counter-button btn-danger"  @click.prevent="reset()">
+                        <button class="counter-button btn btn-danger"  @click.prevent="reset()">
                             Reset
                         </button>
                     </div>
@@ -52,14 +52,14 @@
 
             <div class="flex space-x-4 justify-end">
                 <button class="tooltip-button btn" 
-                    defer-x-data="Tooltip" x-init="init()" 
+                    defer-x-data="Tooltip" defer-x-init="init()" 
                     data-tooltip="Ehi ciao"
                     data-placement="left">
                         Demo Tooltip
                 </button>
 
                 <button class="tooltip-button btn" 
-                    defer-x-data="Tooltip" x-init="init()" 
+                    defer-x-data="Tooltip" defer-x-init="init()" 
                     data-tooltip="Another type of tooltip with different options">
                         Demo Tooltip 2
                 </button>
@@ -84,7 +84,7 @@
                         ]
                     </script>
             
-                    <button class="btn-alt" @click.prevent="open()">
+                    <button class="btn btn-alt" @click.prevent="open()">
                         Demo Gallery
                     </button>
                 </p>
