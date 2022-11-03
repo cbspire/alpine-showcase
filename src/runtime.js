@@ -4,7 +4,7 @@ import Log from './utils/logger'
 /**
  * Modules initialization
  */
- const initModules = () => {
+const initModules = () => {
     window.components = window.components || []
     window.components.push = function (obj) {
         window.components[window.components.length] = obj
