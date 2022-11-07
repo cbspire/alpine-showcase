@@ -12,7 +12,7 @@
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.19.6",
-    "@babel/preset-env": "^7.19.4",
+    "@babel/preset-env": "^7.20.2",
     "acorn": "^8.8.1",
     "autoprefixer": "^10.4.13",
     "babel-loader": "^9.0.1",
